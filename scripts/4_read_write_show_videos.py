@@ -8,9 +8,9 @@ out = cv2.VideoWriter('3_output.avi', fourcc, 20.0, (640, 480)) # 20 fps, 640x48
 while(cap.isOpened()):
     ret, frame = cap.read() # 'ret' will return True or False indicates the frame avilability, 'frame' will capture the frame.
     if ret == True:
-        width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)       
-        height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)    # get video width information, more paramters: https://docs.opencv.org/4.0.0/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d  
-        print('the width of the video is ', width) 
+        width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+        height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)    # get video width information, more paramters: https://docs.opencv.org/4.0.0/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d
+        print('the width of the video is ', width)
         print('the height of the video is ', height)
 
         out.write(frame)
