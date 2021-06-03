@@ -1,5 +1,5 @@
 import cv2
-import os   
+import os
 
 img = cv2.imread('/home/yaxiang/yx_ws/opencv_python_tutorial/sample/lena.jpg', 0)   # read an image
 
@@ -8,6 +8,7 @@ print(img)
 cv2.imshow('image', img)
 # cv2.waitKey(5000)   # wait for 5000ms = 5s
 k = cv2.waitKey(0)
+print("k = ", k)
 
 lena_copy_path = '/home/yaxiang/yx_ws/opencv_python_tutorial/sample/lena_copy.png'
 
