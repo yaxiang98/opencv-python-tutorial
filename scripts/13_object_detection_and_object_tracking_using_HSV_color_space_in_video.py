@@ -5,6 +5,9 @@ import numpy as np
 def callbackAction(x):
     pass
 
+# cap = cv2.VideoCapture('../sample/yt1s.com - YouTuber Performs Despacito 2 With Strangers on a Street in Portugal_v720P.mp4')
+cap = cv2.VideoCapture(0)
+
 cv2.namedWindow("Tracking")
 cv2.createTrackbar("Lower_Hue", "Tracking", 0, 255, callbackAction)
 cv2.createTrackbar("Lower_Saturation", "Tracking", 0, 255, callbackAction)
@@ -16,11 +19,9 @@ cv2.createTrackbar("Upper_Value", "Tracking", 255, 255, callbackAction)
 
 
 while True:
-    frame = cv2.imread('../sample/smarties.png')
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    _, frame = cap.read()
 
-    cv2.imshow('original_image_bgr', frame)
-    # cv2.imshow('original_image_hsv', hsv)
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
     lower_hue = cv2.getTrackbarPos("Lower_Hue", "Tracking")
     lower_saturation = cv2.getTrackbarPos("Lower_Saturation", "Tracking")
@@ -32,20 +33,16 @@ while True:
     lower_blue = np.array([lower_hue, lower_saturation, lower_value])
     upper_blue = np.array([upper_hue, upper_saturation, upper_value])
 
-    print(lower_hue)
+    print('lower_hue is ', lower_hue)
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
-    # 第一个参数：hsv指的是原图
-    # 第二个参数：lower_blue指的是图像中低于这个lower_blue的值，图像值变为0
-    # 第三个参数：upper_blue指的是图像中高于这个upper_blue的值，图像值变为0
-    # 而在lower_blue～upper_blue之间的值变成255
 
     res = cv2.bitwise_and(frame, frame, mask=mask)
 
+    cv2.imshow('video', frame)
     cv2.imshow('mask', mask)
     cv2.imshow('res', res)
 
-    k = cv2.waitKey(0)
-    if k == 27:     # k will be 27 is esc is pressed
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 print('rgb:')
@@ -55,8 +52,9 @@ print(hsv)
 print('mask:')
 print(mask)
 
+cap.release()
 cv2.destroyAllWindows()
-print('ESC key was pressed, window closed!')
+print('q was pressed, window closed!')
 
 
 
