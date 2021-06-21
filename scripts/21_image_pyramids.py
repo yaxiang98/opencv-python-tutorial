@@ -21,7 +21,8 @@ lower_resolution2 = cv2.pyrDown(lower_resolution)
 higher_resolution = cv2.pyrUp(lower_resolution2)
 
 # create a pyramid of multiple resolution using 'for' loop
-layer = cv2.imread('../sample/sudoku.png')
+layer = cv2.imread('../sample/lena.jpg')
+print(layer.shape)
 gaussian_pyramid = [layer]
 
 for i in range(6):
